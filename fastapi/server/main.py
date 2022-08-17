@@ -5,10 +5,12 @@ from fastapi import FastAPI
 
 from .helper.util import foo
 
+# from .helper.util import foo
+
 
 app = FastAPI()
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -22,6 +24,6 @@ def read_root():
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
-    foo()
+    foo('a')
     return {"item_id": item_id, "q": q}
 

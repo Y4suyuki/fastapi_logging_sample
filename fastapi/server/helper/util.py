@@ -3,6 +3,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def foo():
+def foo(x):
     logger.info("hello from foo")
-    return True
+    return x
