@@ -10,9 +10,18 @@ from .helper.util import foo
 
 app = FastAPI()
 
-logging.basicConfig(format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s", level=logging.DEBUG)
+formatter = logging.Formatter('{"datetime": "%(asctime)s", "level": "%(levelname)s", "msg": "%(message)s"}')
+local_formatter = logging.Formatter("%(asctime)s %(name)-12s %(levelname)-8s %(message)s")
 logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
 
+if False:
+    handler.setFormatter(local_formatter)
+else:
+    handler.setFormatter(formatter)
+
+handler.setLevel(logging.DEBUG)
+logger.addHandler(handler)
 
 @app.get("/")
 def read_root():
