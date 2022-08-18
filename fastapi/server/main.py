@@ -1,27 +1,20 @@
 from typing import Union
 import logging
+import logging.config
 
 from fastapi import FastAPI
 
 from .helper.util import foo
+from os import path
+log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logging.conf')
 
 # from .helper.util import foo
-
-
 app = FastAPI()
 
-formatter = logging.Formatter('{"datetime": "%(asctime)s", "level": "%(levelname)s", "msg": "%(message)s"}')
-local_formatter = logging.Formatter("%(asctime)s %(name)-12s %(levelname)-8s %(message)s")
-logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
 
-if False:
-    handler.setFormatter(local_formatter)
-else:
-    handler.setFormatter(formatter)
+logging.config.fileConfig(log_file_path)
+logger = logging.getLogger('production')
 
-handler.setLevel(logging.DEBUG)
-logger.addHandler(handler)
 
 @app.get("/")
 def read_root():
