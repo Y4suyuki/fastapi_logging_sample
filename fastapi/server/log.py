@@ -5,6 +5,9 @@ import logging.config
 from os import path
 
 
+uvicorn_logger = logging.getLogger('uvicorn.error')
+uvicorn_logger.propagate = False
+
 log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logging.conf')
 
 request_id_context = contextvars.ContextVar[Union[str, None]]("request_id", default=None)

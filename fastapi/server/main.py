@@ -17,7 +17,7 @@ class LoggingRoute(APIRoute):
             b_request_body = await request.body()
             request_body = b_request_body.decode('utf8')
             response_body = response.body.decode('utf8')
-            reqres_logger.info("request and response body", extra={"request": request_body, "response": response_body}) 
+            reqres_logger.info("request and response body", extra={"request": request_body if request_body != "" else "{}", "response": response_body}) 
             return response
 
         return custom_route_handler
