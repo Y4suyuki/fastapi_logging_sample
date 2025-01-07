@@ -5,6 +5,7 @@ https://fastapi.tiangolo.com/advanced/custom-request-and-route/#accessing-the-re
 # build
 
 ```sh
+cd fastapi
 docker build . -t sample:latest
 ```
 
